@@ -1,0 +1,23 @@
+server:
+  port: 9090
+
+#sqlite
+spring:
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite:D:/Code/Java/study/wx-pusher/src/main/resources/db/wx.db
+    username: ''
+    password: ''
+  jpa:
+    database-platform: com.asleepyfish.sqlite.SqliteDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+#微信相关配置信息
+wx:
+  # 接受特殊信息模板的openId
+  # 需要注意在 -后面有一个空格，这里是填写special类型的订阅者的openId的地方，有几行就加几个-
+  specialOpenIdList:
+    - xxx
+    - yyy
