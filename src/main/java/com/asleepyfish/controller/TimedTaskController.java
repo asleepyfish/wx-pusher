@@ -44,6 +44,19 @@ public class TimedTaskController {
         wxPublisher.inform(WxTemplateType.COMMON_MORNING);
     }
 
+    @PostMapping("/executeSpecialAfternoonTask")
+    @Scheduled(cron = "0 30 15 * * ?")
+    public void executeSpecialAfternoonTask() {
+        wxPublisher.inform(WxTemplateType.SPECIAL_AFTERNOON);
+    }
+
+    @PostMapping("/executeSpecialNightTask")
+    @Scheduled(cron = "0 20 22 * * ?")
+    public void executeSpecialNightTask() {
+        wxPublisher.inform(WxTemplateType.SPECIAL_NIGHT);
+    }
+
+
     /**
      * 一个小时获取一次accessToken
      */

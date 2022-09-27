@@ -16,7 +16,17 @@ public enum WxTemplateType {
     /**
      * 普通早安模板，给除了SpecialId之外的其他订阅者发送
      */
-    COMMON_MORNING(WxTemplateConstants.COMMON_MORNING, "普通早安模板", WxInformType.OTHER, "给SpecialOpenId以外的人发送");
+    COMMON_MORNING(WxTemplateConstants.COMMON_MORNING, "普通早安模板", WxInformType.OTHER, "给SpecialOpenId以外的人发送"),
+
+    /**
+     * 特殊下午模板
+     */
+    SPECIAL_AFTERNOON(WxTemplateConstants.SPECIAL_AFTERNOON, "特殊下午模板", WxInformType.SPECIAL, "给SpecialOpenId发送"),
+
+    /**
+     * 特殊晚安模板
+     */
+    SPECIAL_NIGHT(WxTemplateConstants.SPECIAL_NIGHT, "特殊晚安模板", WxInformType.SPECIAL, "给SpecialOpenId发送");
 
     private final String templateId;
 
