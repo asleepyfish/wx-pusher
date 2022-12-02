@@ -5,17 +5,21 @@ package com.asleepyfish.exception;
  * @Date: 2022/9/6 14:47
  * @Description: 基本异常类
  */
-public class BaseException extends RuntimeException {
+public class WxException extends RuntimeException {
     private String errorCode = "-1";
 
     private String errorMessage = "";
 
-    public BaseException() {
+    public WxException() {
         super();
     }
 
-    public BaseException(String errorCode, String errorMessage) {
+    public WxException(String errorCode, String errorMessage) {
         this.errorCode = errorCode;
+        this.errorMessage = errorMessage;
+    }
+
+    public WxException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
