@@ -3,6 +3,7 @@ package com.asleepyfish.strategy.event;
 import com.asleepyfish.common.WxConstants;
 import com.asleepyfish.dto.IdentityInfo;
 import com.asleepyfish.dto.IdentityInfoKey;
+import com.asleepyfish.dto.ResponseMessage;
 import com.asleepyfish.enums.WxMessageType;
 import com.asleepyfish.observer.WxPublisher;
 import com.asleepyfish.observer.WxSubscriber;
@@ -45,7 +46,13 @@ public class SubscribeStrategy implements WxEventStrategy {
         String openId = requestMap.get("FromUserName");
         // 公众号
         String publicId = requestMap.get("ToUserName");
-        WxOpUtils.returnMessages(response, WxMessageType.TEXT.getType(), openId, publicId, returnContent);
+        ResponseMessage responseMessage = new ResponseMessage();
+        responseMessage.setFromUserName(publicId);
+        responseMessage.setToUserName(openId);
+        responseMessage.setMsgType(WxMessageType.TEXT.getType());
+        responseMessage.setCreateTime(System.currentTimeMillis());
+        responseMessage.setContent(returnContent);
+        WxOpUtils.returnMessages(response, responseMessage);
         // 查询数据库里是否有该订阅者的信息
         IdentityInfoKey identityInfoKey = new IdentityInfoKey(WxConstants.APP_ID, WxConstants.APP_SECRET, openId);
         IdentityInfo infoFromDataBase = identityInfoRepository.findById(identityInfoKey).orElse(null);

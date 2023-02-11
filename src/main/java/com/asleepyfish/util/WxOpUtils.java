@@ -7,6 +7,8 @@ import com.alibaba.fastjson2.JSONObject;
 import com.asleepyfish.common.WxConstants;
 import com.asleepyfish.dto.IdentityInfo;
 import com.asleepyfish.dto.ResponseMessage;
+import com.asleepyfish.enums.WxMessageType;
+import com.asleepyfish.exception.WxException;
 import com.asleepyfish.observer.WxSubscriber;
 import com.asleepyfish.repository.DistrictInfoRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -35,15 +37,8 @@ public class WxOpUtils {
     private WxOpUtils() {
     }
 
-    public static void returnMessages(HttpServletResponse response, String msgType, String openId, String officialAccount,
-                                      String returnContent) throws IOException {
+    public static void returnMessages(HttpServletResponse response, ResponseMessage responseMessage) throws IOException {
         try (PrintWriter printWriter = response.getWriter()) {
-            ResponseMessage responseMessage = new ResponseMessage();
-            responseMessage.setFromUserName(officialAccount);
-            responseMessage.setToUserName(openId);
-            responseMessage.setMsgType(msgType);
-            responseMessage.setCreateTime(System.currentTimeMillis());
-            responseMessage.setContent(returnContent);
             // 转化成微信可接收的xml信息返回
             String transformedMessage = transformMessage(responseMessage);
             log.info(">>> reply message : {}", responseMessage.getContent());
@@ -57,14 +52,21 @@ public class WxOpUtils {
      * @param textMessage 存储回复信息的对象
      * @return 微信指定接受的回复信息格式（xml）
      */
-    private static String transformMessage(ResponseMessage textMessage) {
-        return "<xml>\n" +
+    public static String transformMessage(ResponseMessage textMessage) {
+        String responseMessage = "<xml>\n" +
                 "  <ToUserName><![CDATA[" + textMessage.getToUserName() + "]]></ToUserName>\n" +
                 "  <FromUserName><![CDATA[" + textMessage.getFromUserName() + "]]></FromUserName>\n" +
                 "  <CreateTime>" + System.currentTimeMillis() + "</CreateTime>\n" +
-                "  <MsgType><![CDATA[text]]></MsgType>\n" +
-                "  <Content><![CDATA[" + textMessage.getContent() + "]]></Content>\n" +
-                "</xml>";
+                "  <MsgType><![CDATA[" + textMessage.getMsgType() + "]]></MsgType>\n";
+        if (textMessage.getMsgType().equals(WxMessageType.TEXT.getType())) {
+            responseMessage = responseMessage + "  <Content><![CDATA[" + textMessage.getContent() + "]]></Content>\n";
+        } else if (textMessage.getMsgType().equals(WxMessageType.TRANSFER_CUSTOMER_SERVICE.getType())) {
+            responseMessage = responseMessage +
+                    "  <TransInfo>\n" +
+                    "    <KfAccount><![CDATA[" + WxConstants.CUSTOMER_SERVICE + "]]></KfAccount>\n" +
+                    "  </TransInfo>\n";
+        }
+        return responseMessage + "</xml>";
     }
 
     /**
@@ -139,15 +141,22 @@ public class WxOpUtils {
      * @return {@link Integer}
      */
     public static Integer getDistrictCode(IdentityInfo identityInfo) {
-        String district = identityInfo.getDistrict();
-        String city = identityInfo.getCity();
-        if (district.charAt(district.length() - 1) == '区') {
-            district = district.substring(0, district.length() - 1);
+        Integer districtCode;
+        try {
+            String district = identityInfo.getDistrict();
+            String city = identityInfo.getCity();
+            char suffix = district.charAt(district.length() - 1);
+            if (suffix == '区' || suffix == '县') {
+                district = district.substring(0, district.length() - 1);
+            }
+            if (city.charAt(city.length() - 1) == '市') {
+                city = city.substring(0, city.length() - 1);
+            }
+            districtCode = SpringUtils.getBean(DistrictInfoRepository.class).getDistrictCode(city, district);
+        } catch (Exception e) {
+            throw new WxException("获取地区编码错误，请检查是否开启允许地理位置访问！");
         }
-        if (city.charAt(city.length() - 1) == '市') {
-            city = city.substring(0, city.length() - 1);
-        }
-        return SpringUtils.getBean(DistrictInfoRepository.class).getDistrictCode(city, district);
+        return districtCode;
     }
 
     public static Long countDays(String beginDate, String endDate) {
@@ -155,7 +164,7 @@ public class WxOpUtils {
         try {
             Date begin = sdf.parse(beginDate);
             Date end = sdf.parse(endDate);
-            return DateUtil.between(begin, end, DateUnit.DAY, false);
+            return DateUtil.between(begin, end, DateUnit.DAY);
         } catch (ParseException e) {
             log.error("日期解析失败：{}", e.getMessage());
         }

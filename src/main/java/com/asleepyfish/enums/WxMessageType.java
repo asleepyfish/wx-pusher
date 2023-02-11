@@ -14,7 +14,13 @@ public enum WxMessageType {
     /**
      * 事件类型
      */
-    EVENT("event");
+    EVENT("event"),
+
+    /**
+     * 客服消息
+     */
+    TRANSFER_CUSTOMER_SERVICE("transfer_customer_service");
+
     private final String type;
 
     WxMessageType(String type) {

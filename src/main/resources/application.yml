@@ -21,3 +21,9 @@ wx:
   specialOpenIdList:
     - xxx
     - yyy
+
+#chatgpt相关配置
+chatgpt:
+  model: text-davinci-003
+  token: sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  retries: 20

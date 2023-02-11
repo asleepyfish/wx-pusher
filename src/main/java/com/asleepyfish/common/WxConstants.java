@@ -48,4 +48,9 @@ public final class WxConstants {
      * 相识日期
      */
     public static final String MEET_DATE = "2018-03-02";
+
+    /**
+     * 客服
+     */
+    public static String CUSTOMER_SERVICE = "ChatGPT@ChatGPT";
 }
