@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -41,7 +40,7 @@ public class SubscribeStrategy implements WxEventStrategy {
         // 加入日常推送列表
         wxPublisher.attach(wxSubscriber);
         // 用户关注后返回信息
-        String returnContent = "感谢关注！";
+        String returnContent = "感谢关注！" + System.lineSeparator() + "以/为开头的信息将被视作对应输入的图片请求~";
         // 发送方账号
         String openId = requestMap.get("FromUserName");
         // 公众号

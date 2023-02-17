@@ -30,7 +30,7 @@ public class TimedTaskController {
      * 给特殊的人发早安（SPECIAL_MORNING模板）
      */
     @PostMapping("/executeSpecialMorningTask")
-    @Scheduled(cron = "0 0 5 * * ?")
+    @Scheduled(cron = "0 0 7 * * ?")
     private void executeSpecialMorningTask() {
         wxPublisher.inform(WxTemplateType.SPECIAL_MORNING);
     }
@@ -39,7 +39,7 @@ public class TimedTaskController {
      * 给除了特殊的人以外的人发早安，（COMMON_MORNING模板）
      */
     @PostMapping("/executeCommonMorningTask")
-    @Scheduled(cron = "0 0 6 * * ?")
+    @Scheduled(cron = "0 0 7 * * ?")
     private void executeCommonMorningTask() {
         wxPublisher.inform(WxTemplateType.COMMON_MORNING);
     }
@@ -62,10 +62,12 @@ public class TimedTaskController {
      */
 
     @Scheduled(fixedRate = 60 * 60 * 1000, initialDelay = 0)
-    private void acquireAccessToken() {
+    @PostMapping("/acquireAccessToken")
+    public String acquireAccessToken() {
         WxConstants.accessToken = WxOpUtils.getAccessToken();
         log.info(">>> update access_token at " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
                 .format(new Date()) + " --------> " + WxConstants.accessToken);
+        return WxConstants.accessToken;
     }
 
 }

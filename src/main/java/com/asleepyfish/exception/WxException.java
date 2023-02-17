@@ -15,11 +15,13 @@ public class WxException extends RuntimeException {
     }
 
     public WxException(String errorCode, String errorMessage) {
+        super(errorMessage);
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
     }
 
     public WxException(String errorMessage) {
+        super(errorMessage);
         this.errorMessage = errorMessage;
     }
 

@@ -1,6 +1,5 @@
 package com.asleepyfish.observer;
 
-import com.asleepyfish.enums.WxInformType;
 import com.asleepyfish.enums.WxTemplateType;
 
 /**

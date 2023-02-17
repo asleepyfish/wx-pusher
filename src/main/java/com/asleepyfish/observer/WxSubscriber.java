@@ -6,9 +6,7 @@ import com.asleepyfish.strategy.WxTemplateContext;
 import com.asleepyfish.util.SpringUtils;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
-import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 
 import java.util.Objects;
 
@@ -33,13 +31,7 @@ public class WxSubscriber implements Subscriber {
     @Override
     public void update(WxTemplateType wxTemplateType) {
         try {
-            WxMpService wxMpService = new WxMpServiceImpl();
-            // 配置基本信息
-            WxMpDefaultConfigImpl wxMpDefaultConfig = new WxMpDefaultConfigImpl();
-            wxMpDefaultConfig.setAppId(identityInfo.getAppId());
-            wxMpDefaultConfig.setSecret(identityInfo.getAppSecret());
-            // 设置基本信息
-            wxMpService.setWxMpConfigStorage(wxMpDefaultConfig);
+            WxMpService wxMpService = SpringUtils.getBean(WxMpService.class);
             // 配置模板信息
             WxMpTemplateMessage wxMpTemplateMessage = new WxMpTemplateMessage();
             // 发送的模板信息
@@ -51,10 +43,11 @@ public class WxSubscriber implements Subscriber {
             // 调用不同的模板策略
             wxTemplateContext.execute(wxTemplateType, wxMpTemplateMessage, identityInfo);
             // 打印模板内容
-            System.out.printf(">>> 模板内容：%s%n", wxMpTemplateMessage.toJson());
+            log.info(">>> 模板内容：{}", wxMpTemplateMessage.toJson());
             // 发送
             wxMpService.getTemplateMsgService().sendTemplateMsg(wxMpTemplateMessage);
         } catch (Exception e) {
+            e.printStackTrace();
             log.error(">>> 给[{}]推送{}策略失败", identityInfo.getOpenId(), wxTemplateType.getTemplateDescription());
             log.error(e.getMessage());
         }

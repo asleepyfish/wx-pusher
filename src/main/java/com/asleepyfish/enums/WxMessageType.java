@@ -17,6 +17,11 @@ public enum WxMessageType {
     EVENT("event"),
 
     /**
+     * 图像
+     */
+    IMAGE("image"),
+
+    /**
      * 客服消息
      */
     TRANSFER_CUSTOMER_SERVICE("transfer_customer_service");
