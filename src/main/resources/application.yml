@@ -25,5 +25,9 @@ wx:
 #chatgpt相关配置
 chatgpt:
   model: text-davinci-003
-  token: sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  retries: 20
+  chat-model: gpt-3.5-turbo
+  token: sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  retries: 10
+  proxy-host: 127.0.0.1
+  proxy-port: 7890
+  session-expiration-time: 30
