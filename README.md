@@ -12,7 +12,8 @@
 
 小白版介绍地址：[https://blog.csdn.net/qq_41821963/article/details/127479741](https://blog.csdn.net/qq_41821963/article/details/127479741)
 
-ChatGPT聊天机器人体验，扫码关注
+ChatGPT聊天机器人体验，扫码关注：
+
 ![img/scan.jpg](img/scan.jpg)
 
 效果：
