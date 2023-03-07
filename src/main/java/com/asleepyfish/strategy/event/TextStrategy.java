@@ -61,7 +61,7 @@ public class TextStrategy implements WxEventStrategy {
         // 初始化标记status = 0，表示解答成功
         int status = 0;
         try {
-            results = OpenAiUtils.createCompletion(acceptContent, openId);
+            results = OpenAiUtils.createChatCompletion(acceptContent, openId);
         } catch (Exception e) {
             status = -1;
             log.error(e.getMessage());
