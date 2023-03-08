@@ -3,8 +3,8 @@
 <div align="center">微信自定义推送</div>
 </p>
 
-> 由于很多朋友咨询问题，有时候会看不到申请好友信息，回复不过来，这里创建了一个交流群
-群号：640827352，有问题群内问，这样后续加入的人有相同的问题也方便解决
+> 前言：由于很多朋友咨询问题，有时候会看不到申请好友信息，回复不过来，这里创建了一个交流群，有问题群内问，这样后续加入的人有相同的问题也方便解决
+# **_QQ群号：640827352_**
 
 项目介绍地址：[https://blog.csdn.net/qq_41821963/article/details/127040795](https://blog.csdn.net/qq_41821963/article/details/127040795)
 > 注：如果不需要ChatGPT功能，请直接下载release版本代码
@@ -14,10 +14,10 @@
 
 ChatGPT聊天机器人体验，扫码关注：
 
-![img/scan.jpg](img/scan.jpg)
+![img/scan.jpg](./img/scan.jpg)
 
 效果：
-![img/chat1.png](img/chat1.png)
+![img/chat1.png](./img/chat1.png)
 
 如果需要接入ChatGPT，请按照下面教程配置。
 # 1.准备阶段
