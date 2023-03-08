@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.asleepyfish</groupId>
     <artifactId>wx-pusher</artifactId>
-    <version>1.2.0</version>
+    <version>1.1.0</version>
     <name>wx-pusher</name>
     <description>wx-pusher</description>
     <properties>
