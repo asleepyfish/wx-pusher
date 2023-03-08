@@ -17,7 +17,8 @@ ChatGPT聊天机器人体验，扫码关注：
 ![scan.jpg](https://img-blog.csdnimg.cn/1d749278a0b243acaf0056cfb1babeb5.jpeg)
 
 效果：
-![chat1.png](https://img-blog.csdnimg.cn/ce2857ce550a4433a35c3a7dc5d5610d.png)
+
+![chat1.png](https://img-blog.csdnimg.cn/2fd967128d9d4292ab9b9f220893477e.png)
 
 如果需要接入ChatGPT，请按照下面教程配置。
 # 1.准备阶段
@@ -35,13 +36,15 @@ ChatGPT聊天机器人体验，扫码关注：
 这里的API KEYS妥善保管后面会用到。
 # 2. 配置阶段
 ## 2.1 配置application.yml文件
-在`application.yml`文件中配置相关参数（Optional为可选参数）
+在`application.yml`文件中配置chatgpt相关参数（Optional为可选参数）
+
+**注：大陆用户需要配置proxy-host和proxy-port来进行代理才能访问OpenAI服务**
 
 | 参数                               | 解释                                                         |
 | ---------------------------------- | ------------------------------------------------------------ |
 | token                              | 申请的API KEYS                                               |
-| proxy-host                         | 代理的ip                                                     |
-| proxy-port                         | 代理的端口                                                   |
+| proxy-host (Optional)              | 代理的ip                                                     |
+| proxy-port (Optional)              | 代理的端口                                                   |
 | model (Optional)                   | model可填可不填，默认即text-davinci-003                      |
 | chat-model (Optional)              | 可填可不填，默认即gpt-3.5-turbo （ChatGPT当前最强模型，生成回答使用的就是这个模型） |
 | retries (Optional)                 | 指的是当chatgpt第一次请求回答失败时，重新请求的次数（增加该参数的原因是因为大量访问的原因，在某一个时刻，chatgpt服务将处于无法访问的情况，不填的默认值为5） |
@@ -57,7 +60,8 @@ chatgpt:
   session-expiration-time: 30
 ```
 
-**_其中token、proxy-host、proxy-port是必填的_**
+**_其中token必填、大陆用户proxy-host、proxy-port也是必填的（某些你懂的原因）_**
+
 需要准备好代理，我这里用的是Clash，然后需要有国外的节点，proxy-host、proxy-port即Clash的代理ip和端口
 
 ## 2.2 注解
