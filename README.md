@@ -14,10 +14,10 @@
 
 ChatGPT聊天机器人体验，扫码关注：
 
-![img/scan.jpg](./img/scan.jpg)
+![scan.jpg](https://img-blog.csdnimg.cn/1d749278a0b243acaf0056cfb1babeb5.jpeg)
 
 效果：
-![img/chat1.png](./img/chat1.png)
+![chat1.png](https://img-blog.csdnimg.cn/ce2857ce550a4433a35c3a7dc5d5610d.png)
 
 如果需要接入ChatGPT，请按照下面教程配置。
 # 1.准备阶段
