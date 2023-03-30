@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.asleepyfish</groupId>
     <artifactId>wx-pusher</artifactId>
-    <version>1.2.0</version>
+    <version>1.1.0</version>
     <name>wx-pusher</name>
     <description>wx-pusher</description>
     <properties>
@@ -20,7 +20,7 @@
         <hutool.version>5.8.5</hutool.version>
         <fastjson2.version>2.0.12</fastjson2.version>
         <sqlite-jdbc.version>3.39.2.1</sqlite-jdbc.version>
-        <chatgpt.version>1.1.1</chatgpt.version>
+        <chatgpt.version>1.1.2</chatgpt.version>
     </properties>
     <dependencies>
         <dependency>
