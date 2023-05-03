@@ -57,6 +57,9 @@ public class SubscribeStrategy implements WxEventStrategy {
         IdentityInfo infoFromDataBase = identityInfoRepository.findById(identityInfoKey).orElse(null);
         // 如果没有该订阅者信息则更新，有该订阅者信息则跳过（数据库中的信息可能包括更精确的经纬度信息）
         if (infoFromDataBase != null) {
+            // 如果是取消关注重新关注的时候，需要更新status为0
+            infoFromDataBase.setStatus(0);
+            identityInfoRepository.save(infoFromDataBase);
             return;
         }
         IdentityInfo identityInfo = new IdentityInfo();
