@@ -6,14 +6,15 @@ package com.asleepyfish.common;
  * @Description: 微信模板常量类
  */
 public class WxTemplateConstants {
+
     private WxTemplateConstants() {
     }
 
-    public static final String SPECIAL_MORNING = "_baoN1JyyPUAA8onx2ya6LTnNXALBtrwmF_b7T6B7lk";
+    public static final String SPECIAL_MORNING = "lJs7Y5qCziPd9OAR142X98Q7u2ZXA6MAzf0K6SA7ITE";
 
-    public static final String COMMON_MORNING = "yoN_oFwJd7aYtJGZ48erNSTILWEgg8hEwDSBaFbks4c";
+    public static final String COMMON_MORNING = "DaLno0jbl6gbX2XVYkECDZf0VXOr3dPW0dAo0WOBLDg";
 
-    public static final String SPECIAL_AFTERNOON = "he6L3MLThHR9gW9MWuv09BVd9Dt_VlA9E920bTF6Zj4";
+    public static final String SPECIAL_AFTERNOON = "nIk83ClpyrnbxXE6O1WP3hhpcZTIjz-DAcriSfF_fu8";
 
-    public static final String SPECIAL_NIGHT = "PlBVl_3Ow_Y1oXEqDCwz2ivxzSS_r1flYBG9qgyg_o8";
+    public static final String SPECIAL_NIGHT = "5itLh7zobIdkXTZRyuZ_fPflpiwGeI4gOLuNgh3T-EU";
 }

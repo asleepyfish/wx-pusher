@@ -4,5 +4,4 @@
 
 今天一天辛苦啦，快做个眼保健操放松一下吧❤❤
 
-{{poem.DATA}}
-                               ——{{title.DATA}}
+言：{{poem.DATA}}                            ——{{title.DATA}}

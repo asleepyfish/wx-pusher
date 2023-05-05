@@ -43,8 +43,20 @@ public class SpecialMorningStrategy implements WxTemplateStrategy {
         JSONObject dailyEnglishObject = JSONArray.parseArray(JSONObject.parseObject(dailyEnglishStr).get("newslist").toString()).getJSONObject(0);
         // 英文句子
         String english = dailyEnglishObject.get("content").toString();
+        // 20230505更新，wx平台最新规范[https://developers.weixin.qq.com/community/develop/doc/000a2ae286cdc0f41a8face4c51801]
+        // 每个模板块最多只能填充20个字符，需要对超长内容切割
+        String english1 = english.substring(0, Math.min(english.length(), 20));
+        String english2 = null;
+        if (english.length() > 20) {
+            english2 = english.substring(20);
+        }
         // 中文翻译
         String chinese = dailyEnglishObject.get("note").toString();
+        String chinese1 = chinese.substring(0, Math.min(chinese.length(), 20));
+        String chinese2 = null;
+        if (chinese.length() > 20) {
+            chinese2 = chinese.substring(20);
+        }
         wxMpTemplateMessage.addData(new WxMpTemplateData("location", identityInfo.getAddress(), "#9370DB"));
         wxMpTemplateMessage.addData(new WxMpTemplateData("now_temp", now.get("temp").toString(), "#87CEFA"));
         wxMpTemplateMessage.addData(new WxMpTemplateData("now_weather", now.get("text").toString(), "#87CEEB"));
@@ -72,7 +84,9 @@ public class SpecialMorningStrategy implements WxTemplateStrategy {
         // 相识天数，可以修改为恋爱天数，或者其他纪念意义天数
         Long meetDays = WxOpUtils.countDays(WxConstants.MEET_DATE, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         wxMpTemplateMessage.addData(new WxMpTemplateData("meet_days", String.valueOf(meetDays), "#C000C0"));
-        wxMpTemplateMessage.addData(new WxMpTemplateData("daily_english_en", english, "#FFCCFF"));
-        wxMpTemplateMessage.addData(new WxMpTemplateData("daily_english_cn", chinese, "#CCCCFF"));
+        wxMpTemplateMessage.addData(new WxMpTemplateData("daily_english_en1", english1, "#FFCCFF"));
+        wxMpTemplateMessage.addData(new WxMpTemplateData("daily_english_en2", english2, "#FFCCFF"));
+        wxMpTemplateMessage.addData(new WxMpTemplateData("daily_english_cn1", chinese1, "#CCCCFF"));
+        wxMpTemplateMessage.addData(new WxMpTemplateData("daily_english_cn2", chinese2, "#CCCCFF"));
     }
 }
