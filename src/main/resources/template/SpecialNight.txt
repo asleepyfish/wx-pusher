@@ -3,5 +3,4 @@
 今天一天辛苦啦~
 晚上睡觉记得盖好被子哦❤
 
-{{saying.DATA}}
-                               ——{{title.DATA}}
+言：{{saying.DATA}}                 ——{{title.DATA}}

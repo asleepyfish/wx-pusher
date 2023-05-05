@@ -1,12 +1,13 @@
 当前位置：{{location.DATA}}
 
 实时天气：{{now_temp.DATA}}°C  {{now_weather.DATA}}
-{{now_wind_dir.DATA}}{{now_wind_class.DATA}} | 湿度{{now_rh.DATA}}%
+气象：{{now_wind_dir.DATA}}{{now_wind_class.DATA}} | 湿度{{now_rh.DATA}}%
 今天：{{today_weather.DATA}}  {{today_high.DATA}}/{{today_low.DATA}}°C
 明天：{{tomorrow_weather.DATA}}  {{tomorrow_high.DATA}}/{{tomorrow_low.DATA}}°C
 
-相识已经：{{meet_days.DATA}}天 ❤
+恋爱已经：{{love_days.DATA}}天 ❤
+下次见面还有：{{next_meet_days.DATA}}天 ❤
 
-{{daily_english_en.DATA}}
+英：{{daily_english_en1.DATA}}{{daily_english_en2.DATA}}
 
-{{daily_english_cn.DATA}}
+中：{{daily_english_cn1.DATA}}{{daily_english_cn2.DATA}}

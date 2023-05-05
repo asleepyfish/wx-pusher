@@ -7,6 +7,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.asleepyfish.common.WxConstants;
 import com.asleepyfish.dto.IdentityInfo;
 import com.asleepyfish.dto.ResponseMessage;
+import com.asleepyfish.exception.WxException;
 import com.asleepyfish.observer.WxSubscriber;
 import com.asleepyfish.repository.DistrictInfoRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -139,15 +140,22 @@ public class WxOpUtils {
      * @return {@link Integer}
      */
     public static Integer getDistrictCode(IdentityInfo identityInfo) {
-        String district = identityInfo.getDistrict();
-        String city = identityInfo.getCity();
-        if (district.charAt(district.length() - 1) == '区') {
-            district = district.substring(0, district.length() - 1);
+        Integer districtCode;
+        try {
+            String district = identityInfo.getDistrict();
+            String city = identityInfo.getCity();
+            char suffix = district.charAt(district.length() - 1);
+            if (suffix == '区' || suffix == '县') {
+                district = district.substring(0, district.length() - 1);
+            }
+            if (city.charAt(city.length() - 1) == '市') {
+                city = city.substring(0, city.length() - 1);
+            }
+            districtCode = SpringUtils.getBean(DistrictInfoRepository.class).getDistrictCode(city, district);
+        } catch (Exception e) {
+            throw new WxException("获取地区编码错误，请检查是否开启允许地理位置访问！");
         }
-        if (city.charAt(city.length() - 1) == '市') {
-            city = city.substring(0, city.length() - 1);
-        }
-        return SpringUtils.getBean(DistrictInfoRepository.class).getDistrictCode(city, district);
+        return districtCode;
     }
 
     public static Long countDays(String beginDate, String endDate) {
@@ -155,7 +163,7 @@ public class WxOpUtils {
         try {
             Date begin = sdf.parse(beginDate);
             Date end = sdf.parse(endDate);
-            return DateUtil.between(begin, end, DateUnit.DAY, false);
+            return DateUtil.between(begin, end, DateUnit.DAY);
         } catch (ParseException e) {
             log.error("日期解析失败：{}", e.getMessage());
         }
