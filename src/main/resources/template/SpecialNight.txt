@@ -1,4 +1,4 @@
-{{location.DATA}}
+当前位置：{{location.DATA}}
 
 晚安啦~❤❤
 
