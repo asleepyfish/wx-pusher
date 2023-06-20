@@ -16,5 +16,5 @@ public class WxTemplateConstants {
 
     public static final String SPECIAL_AFTERNOON = "nIk83ClpyrnbxXE6O1WP3hhpcZTIjz-DAcriSfF_fu8";
 
-    public static final String SPECIAL_NIGHT = "5itLh7zobIdkXTZRyuZ_fPflpiwGeI4gOLuNgh3T-EU";
+    public static final String SPECIAL_NIGHT = "SpOTQ2mHCKrF-k6PfjnWLrrQVA7RSpr_CpWI2cNxXrM";
 }
