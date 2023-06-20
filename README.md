@@ -14,7 +14,7 @@
 
 ChatGPT聊天机器人体验，扫码关注：
 
-![scan.jpg](https://img-blog.csdnimg.cn/1d749278a0b243acaf0056cfb1babeb5.jpeg)
+![scan.jpg](http://alpacos.cn/images/scan.jpg)
 
 效果：
 
